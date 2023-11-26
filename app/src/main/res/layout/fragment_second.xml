@@ -13,12 +13,11 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <!-- Top Bar with Yellow Background -->
         <RelativeLayout
             android:id="@+id/topBar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="#9F800080"
+            android:background="#B4673AB7"
             android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,9 +28,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="Dashboard"
+                android:text="DashBoard"
                 android:textColor="#000000"
-                android:textSize="20sp"
+                android:textSize="26sp"
                 android:textStyle="bold" />
 
             <!-- Add your navigation elements here if needed -->
@@ -58,42 +57,72 @@
                 android:text="Lost"
                 android:textColor="#000000"
                 android:textStyle="bold"
-                android:textSize="18sp"/>
-
+                android:textSize="22sp"/>
+            <View
+                android:layout_width="3dp"
+                android:layout_height="match_parent"
+                android:background="#000000"
+                android:layout_marginStart="8dp"
+            />
             <Button
                 android:id="@+id/buttonFind"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="Find"
+                android:text="Found"
                 android:textColor="#000000"
                 android:background="@android:color/transparent"
-                android:textSize="18sp"/>
+                android:textSize="22sp"/>
+
 
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="#000000"
+            android:layout_marginTop="4dp"
+            app:layout_constraintTop_toBottomOf="@id/buttonLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
 
         <!-- User Info and Lost Item Display -->
         <RelativeLayout
             android:id="@+id/userInfoLayout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_width="341dp"
+            android:layout_height="222dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/rounded_corner"
+
+            android:elevation="25dp"
             android:padding="16dp"
             app:cardCornerRadius="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/buttonLayout"
-            android:elevation="20dp"
-            android:background="@drawable/rounded_corner"> <!-- Add this line to set the elevation for the shadow -->
+            app:layout_constraintTop_toBottomOf="@id/buttonLayout"> <!-- Add this line to set the elevation for the shadow -->
+            <ImageView
+                android:id="@+id/imageViewUserAvatar"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="8dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/usericon" />
+
+            <!-- Use your actual image here -->
 
             <TextView
                 android:id="@+id/textViewUserName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/imageViewUserAvatar"
+                android:layout_marginStart="47dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/imageViewUserAvatar"
                 android:text="User Name"
                 android:textColor="#000000"
-                android:textSize="18sp"
-                android:textStyle="bold"
+                android:textSize="20sp"
                 android:translationZ="4dp" />
 
             <ImageView
@@ -101,8 +130,7 @@
                 android:layout_width="93dp"
                 android:layout_height="80dp"
                 android:layout_below="@id/textViewUserName"
-                android:layout_marginTop="8dp"/>
-                 <!-- Use your actual image here -->
+                android:layout_marginTop="28dp" />
 
             <TextView
                 android:id="@+id/textViewLostItemName"
@@ -120,23 +148,48 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textViewLostItemName"
-                android:layout_marginTop="29dp"
+                android:layout_marginTop="51dp"
                 android:text="Item Description"
                 android:textColor="#000000"
                 android:textSize="12sp" />
 
             <Button
                 android:id="@+id/buttonFound"
-                android:layout_width="wrap_content"
+                android:layout_width="138dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textViewItemDescription"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="-32dp"
-                android:layout_marginEnd="21dp"
+                android:layout_marginTop="-40dp"
+                android:layout_marginEnd="4dp"
                 android:background="@android:color/transparent"
                 android:text="Found"
                 android:textColor="#000000"
-                android:textSize="18sp"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+        <!-- Add a section at the bottom of the screen with a "Add" button -->
+        <RelativeLayout
+            android:id="@+id/bottomSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="196dp"
+
+
+            android:padding="16dp"
+            app:layout_constraintTop_toBottomOf="@id/userInfoLayout"
+            tools:layout_editor_absoluteX="16dp">
+
+            <Button
+                android:id="@+id/buttonAdd"
+                android:layout_width="66dp"
+                android:layout_height="66dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="13dp"
+                android:background="@drawable/round_button"
+                android:text="+"
+                android:textColor="#FFFFFF"
+                android:textSize="28sp"
                 android:textStyle="bold" />
         </RelativeLayout>
 
