@@ -1,27 +1,21 @@
-<!-- res/layout/fragment_second.xml -->
-
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".SecondFragment">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:orientation="vertical">
 
         <RelativeLayout
             android:id="@+id/topBar"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#B4673AB7"
-            android:padding="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:padding="16dp">
 
             <TextView
                 android:id="@+id/textViewTitle"
@@ -38,162 +32,56 @@
         </RelativeLayout>
 
         <!-- Buttons for Lost and Find -->
+
         <LinearLayout
             android:id="@+id/buttonLayout"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/topBar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:padding="16dp">
 
             <Button
                 android:id="@+id/buttonLost"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
+                android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:text="Lost"
                 android:textColor="#000000"
-                android:textStyle="bold"
-                android:textSize="22sp"/>
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
             <View
-                android:layout_width="3dp"
+                android:layout_width="2dp"
                 android:layout_height="match_parent"
-                android:background="#000000"
-                android:layout_marginStart="8dp"
-            />
+                android:background="#000000" />
+
             <Button
                 android:id="@+id/buttonFind"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
                 android:text="Found"
                 android:textColor="#000000"
-                android:background="@android:color/transparent"
-                android:textSize="22sp"/>
-
+                android:textSize="22sp" />
 
         </LinearLayout>
+
+        <!-- RecyclerView -->
+
         <View
             android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="#000000"
-            android:layout_marginTop="4dp"
-            app:layout_constraintTop_toBottomOf="@id/buttonLayout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:layout_height="1dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="#000000" />
 
-
-        <!-- User Info and Lost Item Display -->
-        <RelativeLayout
-            android:id="@+id/userInfoLayout"
-            android:layout_width="341dp"
-            android:layout_height="222dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="36dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/rounded_corner"
-
-            android:elevation="25dp"
-            android:padding="16dp"
-            app:cardCornerRadius="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/buttonLayout"> <!-- Add this line to set the elevation for the shadow -->
-            <ImageView
-                android:id="@+id/imageViewUserAvatar"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="8dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/usericon" />
-
-            <!-- Use your actual image here -->
-
-            <TextView
-                android:id="@+id/textViewUserName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/imageViewUserAvatar"
-                android:layout_marginStart="47dp"
-                android:layout_marginTop="10dp"
-                android:layout_toEndOf="@+id/imageViewUserAvatar"
-                android:text="User Name"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:translationZ="4dp" />
-
-            <ImageView
-                android:id="@+id/imageViewLostItem"
-                android:layout_width="93dp"
-                android:layout_height="80dp"
-                android:layout_below="@id/textViewUserName"
-                android:layout_marginTop="28dp" />
-
-            <TextView
-                android:id="@+id/textViewLostItemName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/imageViewLostItem"
-                android:layout_marginStart="107dp"
-                android:layout_marginTop="-53dp"
-                android:text="Lost Item Name"
-                android:textColor="#000000"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/textViewItemDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textViewLostItemName"
-                android:layout_marginTop="51dp"
-                android:text="Item Description"
-                android:textColor="#000000"
-                android:textSize="12sp" />
-
-            <Button
-                android:id="@+id/buttonFound"
-                android:layout_width="138dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textViewItemDescription"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="-40dp"
-                android:layout_marginEnd="4dp"
-                android:background="@android:color/transparent"
-                android:text="Found"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
-        <!-- Add a section at the bottom of the screen with a "Add" button -->
-        <RelativeLayout
-            android:id="@+id/bottomSection"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="196dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
-
-            android:padding="16dp"
-            app:layout_constraintTop_toBottomOf="@id/userInfoLayout"
-            tools:layout_editor_absoluteX="16dp">
-
-            <Button
-                android:id="@+id/buttonAdd"
-                android:layout_width="66dp"
-                android:layout_height="66dp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="13dp"
-                android:background="@drawable/round_button"
-                android:text="+"
-                android:textColor="#FFFFFF"
-                android:textSize="28sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
-
-        <!-- Circular Button for Adding a New Item -->
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
