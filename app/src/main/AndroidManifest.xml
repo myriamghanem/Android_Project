@@ -16,17 +16,22 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".MainActivity"
-            android:exported="true"
+            android:name=".SignupFragment"
             android:label="@string/app_name"
-            android:resizeableActivity="true"
-            android:theme="@style/Theme.Project">
-
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".LoginFragment"
+            android:label="@string/app_name">
+        </activity>
+
+        <!-- If you have other activities, you can include them here -->
+
     </application>
 
 </manifest>

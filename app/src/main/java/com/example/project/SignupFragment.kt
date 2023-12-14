@@ -4,18 +4,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.project.databinding.ActivitySignUpBinding
+import com.example.project.databinding.FragmentSignupBinding
 import com.google.firebase.auth.FirebaseAuth
 
 class SignupFragment: AppCompatActivity() {
 
-    private lateinit var binding: ActivitySignUpBinding
+    private lateinit var binding: FragmentSignupBinding
     private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivitySignUpBinding.inflate(layoutInflater)
+        binding = FragmentSignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         firebaseAuth = FirebaseAuth.getInstance()
@@ -41,6 +41,7 @@ class SignupFragment: AppCompatActivity() {
 
                         }
                     }
+
                 } else {
                     Toast.makeText(this, "Password is not matching", Toast.LENGTH_SHORT).show()
                 }
