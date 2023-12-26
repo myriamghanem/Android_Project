@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/SecondFragment">
+    app:startDestination="@id/FirstFragment">
 
     <fragment
         android:id="@+id/FirstFragment"
@@ -11,16 +11,19 @@
         android:label=""
         tools:layout="@layout/fragment_first">
 
+        <!-- Add this action for navigation from FirstFragment to SecondFragment -->
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.example.project.SecondFragment"
         android:label=""
         tools:layout="@layout/fragment_second">
 
+        <!-- Add this action for navigation from SecondFragment to FirstFragment -->
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
