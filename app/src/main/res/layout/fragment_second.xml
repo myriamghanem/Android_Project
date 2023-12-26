@@ -14,7 +14,7 @@
             android:id="@+id/topBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#B4673AB7"
+            android:background="#DA693494"
             android:padding="16dp">
 
             <TextView
@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:text="DashBoard"
-                android:textColor="#000000"
+                android:textColor="@color/white"
                 android:textSize="26sp"
                 android:textStyle="bold" />
 
