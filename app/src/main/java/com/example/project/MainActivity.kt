@@ -28,6 +28,13 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
+
+        // Check for the extra and navigate to the specified destination
+        val initialDestination = intent.getIntExtra("initial_destination", -1)
+        if (initialDestination != -1) {
+            navController.navigate(initialDestination)
+        }
+
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
@@ -36,8 +43,9 @@ class MainActivity : AppCompatActivity() {
             navController.navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
 
-        supportActionBar?.title = "Post"
+
     }
+
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

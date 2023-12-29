@@ -29,18 +29,19 @@ class LoginFragment : AppCompatActivity() {
             val pass = binding.passET.text.toString()
 
             if (email.isNotEmpty() && pass.isNotEmpty()) {
-
+// Inside your firebaseAuth.signInWithEmailAndPassword listener
                 firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        // Authentication successful, start SecondFragment activity
-                        val intent = Intent(this, SecondFragment::class.java)
+                        // Authentication successful, start MainActivity
+                        val intent = Intent(this, MainActivity::class.java)
+                        // Add the following line to specify the initial destination for MainActivity
+                        intent.putExtra("initial_destination", R.id.SecondFragment)
                         startActivity(intent)
+                        finish() // Finish the LoginFragment activity to prevent navigating back to it
                     } else {
                         Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
                     }
                 }
-            } else {
-                Toast.makeText(this, "Empty Fields Are not Allowed !!", Toast.LENGTH_SHORT).show()
             }
         }
 

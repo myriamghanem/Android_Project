@@ -87,7 +87,9 @@ class FirstFragment : Fragment() {
         db.collection("Post").add(post)
             .addOnSuccessListener {
                 Toast.makeText(requireContext(), "Post added successfully", Toast.LENGTH_SHORT).show()
-                // Optional: Navigate to another fragment if needed
+
+                // Optional: Navigate to SecondFragment after adding the post
+                findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
             }
             .addOnFailureListener { e ->
                 Toast.makeText(requireContext(), "Error adding post: ${e.message}", Toast.LENGTH_SHORT).show()
