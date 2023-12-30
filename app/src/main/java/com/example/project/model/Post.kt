@@ -5,8 +5,6 @@ public data class Post(
     val description: String = "",
     val imageUrl: String = "",
     val location: String = "",
-    val userId: Int? = null,
+    val userId: Int?  = null,
     val Isfound: Boolean= false
 )
-
-

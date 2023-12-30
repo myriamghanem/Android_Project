@@ -1,3 +1,4 @@
+
 package com.example.project
 
 import android.content.Intent
@@ -62,20 +63,28 @@ class SignupFragment : AppCompatActivity() {
     private fun saveUserInfo(email: String, username: String) {
         // Save user information to Firebase (you can modify this based on your data structure)
         val db = FirebaseFirestore.getInstance()
-        val user = hashMapOf(
-            "email" to email,
-            "username" to username
-        )
+        val userId = FirebaseAuth.getInstance().currentUser?.uid // Get the current user's ID
 
-        db.collection("users")
-            .add(user)
-            .addOnSuccessListener {
-                Log.d(TAG, "User information saved successfully")
-            }
-            .addOnFailureListener { e ->
-                Log.w(TAG, "Error saving user information", e)
-            }
+        if (userId != null) {
+            val user = hashMapOf(
+                "userId" to userId,
+                "email" to email,
+                "username" to username
+            )
+
+            db.collection("users")
+                .add(user)
+                .addOnSuccessListener {
+                    Log.d(TAG, "User information saved successfully")
+                }
+                .addOnFailureListener { e ->
+                    Log.w(TAG, "Error saving user information", e)
+                }
+        } else {
+            Log.e(TAG, "User ID is null")
+        }
     }
+
 
     companion object {
         private const val TAG = "SignupFragment"
