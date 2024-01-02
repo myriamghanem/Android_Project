@@ -1,0 +1,74 @@
+<!-- res/layout/item_found_item.xml -->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:padding="16dp"
+    android:layout_margin="8dp"
+    android:elevation="10dp"
+    android:background="@drawable/rounded_corner">
+
+    <ImageView
+        android:id="@+id/imageViewUserAvatar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/usericon" />
+
+    <TextView
+        android:id="@+id/textViewUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageViewUserAvatar"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/imageViewUserAvatar"
+        android:text="User Name"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:translationZ="4dp" />
+
+    <ImageView
+        android:id="@+id/imageViewFoundItem"
+        android:layout_width="93dp"
+        android:layout_height="80dp"
+        android:layout_below="@id/textViewUserName"
+        android:layout_marginTop="28dp" />
+
+    <TextView
+        android:id="@+id/textViewFoundItemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageViewFoundItem"
+        android:layout_marginStart="107dp"
+        android:layout_marginTop="-53dp"
+        android:text="Found Item Name"
+        android:textColor="#000000"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textViewItemDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewFoundItemName"
+        android:layout_marginTop="51dp"
+        android:text="Item Description"
+        android:textColor="#000000"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/buttonClaim"
+        android:layout_width="138dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewItemDescription"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-32dp"
+        android:layout_marginEnd="43dp"
+        android:background="@android:color/transparent"
+        android:text="Claim"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+</RelativeLayout>

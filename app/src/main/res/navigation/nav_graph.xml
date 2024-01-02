@@ -23,11 +23,26 @@
         android:label=""
         tools:layout="@layout/fragment_second">
 
+        <!-- Add this action for navigation from SecondFragment to FoundFragment -->
+        <action
+            android:id="@+id/action_SecondFragment_to_FoundFragment"
+            app:destination="@id/FoundFragment" />
+
         <!-- Add this action for navigation from SecondFragment to FirstFragment -->
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/FoundFragment"
+        android:name="com.example.project.FoundFragment"
+        android:label=""
+        tools:layout="@layout/fragment_found">
 
+        <!-- Add this action for navigation from FoundFragment to SecondFragment -->
+        <action
+            android:id="@+id/action_FoundFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+    </fragment>
 </navigation>
