@@ -38,10 +38,7 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        binding.fab.setOnClickListener {
-            // Navigate to FirstFragment when "+" button is clicked
-            navController.navigate(R.id.action_SecondFragment_to_FoundFragment)
-        }
+
 
 
     }

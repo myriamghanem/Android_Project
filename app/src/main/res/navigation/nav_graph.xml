@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/LostFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.project.FirstFragment"
+        android:id="@+id/LostFragment"
+        android:name="com.example.project.LostFragment"
         android:label=""
         tools:layout="@layout/fragment_first">
 
@@ -30,8 +30,8 @@
 
         <!-- Add this action for navigation from SecondFragment to FirstFragment -->
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_SecondFragment_to_LostFragment"
+            app:destination="@id/LostFragment" />
     </fragment>
 
     <fragment
