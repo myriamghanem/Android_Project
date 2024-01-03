@@ -98,14 +98,20 @@
 
 
 </androidx.core.widget.NestedScrollView>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        app:elevation="6dp"
-        app:fabSize="normal"
-        app:pressedTranslationZ="12dp"/>
+
+
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="68dp"
+            android:id="@+id/addButton"
+            android:background="@drawable/round_button"
+            android:text="+"
+            android:textColor="@android:color/white"
+
+            />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

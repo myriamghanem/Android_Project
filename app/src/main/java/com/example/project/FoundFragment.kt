@@ -88,14 +88,17 @@ class FoundFragment : Fragment() {
             imageUrl = imageUrl,
             location = location
         )
+        // Generate a unique ID for the post
+        val foundItemId = db.collection("Found").document().id
+        foundItem.id = foundItemId // Set the generated ID in the post object
 
-        db.collection("Found").add(foundItem)
+        db.collection("Found").document(foundItemId).set(foundItem) // Use the generated ID when adding the post
             .addOnSuccessListener {
-                Toast.makeText(requireContext(), "Found item added successfully", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Found Item added successfully", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_FoundFragment_to_SecondFragment)
             }
             .addOnFailureListener { e ->
-                Toast.makeText(requireContext(), "Error adding found item: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Error adding post: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
 

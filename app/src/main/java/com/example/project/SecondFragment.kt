@@ -1,5 +1,6 @@
 package com.example.project
 
+import LostItemAdapter
 import android.content.ContentValues
 import android.graphics.Typeface
 import android.os.Bundle
@@ -15,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.project.databinding.FragmentSecondBinding
 import com.example.project.model.Found
 import com.example.project.model.Post
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.FirebaseFirestore
 
 class SecondFragment : Fragment() {
@@ -26,8 +26,7 @@ class SecondFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var lostButton: Button
     private lateinit var foundButton: Button
-    private lateinit var addButton: FloatingActionButton
-
+    private lateinit var addButton: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +43,8 @@ class SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Initially hide the FloatingActionButton
+
         makeBold(lostButton)
 
         lostButton.setOnClickListener {
@@ -51,6 +52,8 @@ class SecondFragment : Fragment() {
             makeBold(lostButton)
             makeNormal(foundButton)
             navigateToAddFragment(R.id.action_SecondFragment_to_LostFragment)
+
+            // Show the FloatingActionButton when Lost is clicked
         }
 
         foundButton.setOnClickListener {
@@ -58,10 +61,13 @@ class SecondFragment : Fragment() {
             makeBold(foundButton)
             makeNormal(lostButton)
             navigateToAddFragment(R.id.action_SecondFragment_to_FoundFragment)
+
+            // Show the FloatingActionButton when Found is clicked
         }
 
         recyclerView.layoutManager = LinearLayoutManager(context)
 
+        // Fetch lost items initially
         fetchLostItemsFromFirestore()
     }
 
@@ -76,48 +82,53 @@ class SecondFragment : Fragment() {
     private fun fetchFoundItemsFromFirestore() {
         val db = FirebaseFirestore.getInstance()
 
-        db.collection("Found")
-            .get()
-            .addOnSuccessListener { result ->
-                val foundItemsList = mutableListOf<Found>()
+        val query = db.collection("Found")
+            .whereEqualTo("isClaimed", false)
 
-                for (document in result) {
-                    val foundItem = document.toObject(Found::class.java)
-                    foundItemsList.add(foundItem)
-                }
+        // Add a snapshot listener to listen for real-time updates
+        query.addSnapshotListener { value, error ->
+            if (error != null) {
+                Log.e(ContentValues.TAG, "Error getting found items.", error)
+                return@addSnapshotListener
+            }
 
-                val foundItemAdapter = FoundItemAdapter(requireContext(), foundItemsList)
-                recyclerView.adapter = foundItemAdapter
+            val foundItemsList = mutableListOf<Found>()
+
+            for (document in value!!) {
+                val foundItem = document.toObject(Found::class.java)
+                foundItemsList.add(foundItem)
             }
-            .addOnFailureListener { exception ->
-                // Handle failures
-                Log.e(ContentValues.TAG, "Error getting found items.", exception)
-            }
+
+            val foundItemAdapter = FoundItemAdapter(requireContext(), foundItemsList)
+            recyclerView.adapter = foundItemAdapter
+        }
     }
 
     private fun fetchLostItemsFromFirestore() {
         val db = FirebaseFirestore.getInstance()
 
-        db.collection("Post")
-            .get()
-            .addOnSuccessListener { result ->
-                val lostItemsList = mutableListOf<Post>()
+        val query = db.collection("Post")
+            .whereEqualTo("isfound", false)
 
-                for (document in result) {
-                    val lostItem = document.toObject(Post::class.java)
-                    lostItemsList.add(lostItem)
-                }
-
-                val lostItemAdapter = LostItemAdapter(requireContext(), lostItemsList)
-                recyclerView.adapter = lostItemAdapter
-
-                Log.d(ContentValues.TAG, "Lost items retrieved successfully. Item count: ${lostItemsList.size}")
-
+        // Add a snapshot listener to listen for real-time updates
+        query.addSnapshotListener { value, error ->
+            if (error != null) {
+                Log.e(ContentValues.TAG, "Error getting lost items.", error)
+                return@addSnapshotListener
             }
-            .addOnFailureListener { exception ->
-                // Handle failures
-                Log.e(ContentValues.TAG, "Error getting lost items.", exception)
+
+            val lostItemsList = mutableListOf<Post>()
+
+            for (document in value!!) {
+                val lostItem = document.toObject(Post::class.java)
+                lostItemsList.add(lostItem)
             }
+
+            val lostItemAdapter = LostItemAdapter(requireContext(), lostItemsList)
+            recyclerView.adapter = lostItemAdapter
+
+            Log.d(ContentValues.TAG, "Lost items retrieved successfully. Item count: ${lostItemsList.size}")
+        }
     }
 
     private fun navigateToAddFragment(actionId: Int) {

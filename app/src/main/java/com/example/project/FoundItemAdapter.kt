@@ -10,9 +10,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.project.model.Found
 import com.example.project.utils.loadImageFromURL
+import com.google.firebase.firestore.FirebaseFirestore
 
 class FoundItemAdapter(private val context: Context, private val items: List<Found>) :
     RecyclerView.Adapter<FoundItemAdapter.ViewHolder>() {
+
+    private val db = FirebaseFirestore.getInstance()
+
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textViewUserName: TextView = itemView.findViewById(R.id.textViewUserName)
@@ -39,11 +43,24 @@ class FoundItemAdapter(private val context: Context, private val items: List<Fou
 
         holder.buttonClaim.setOnClickListener {
             // Handle button click if needed
-            // You may want to update the found item status here
-        }
+            updateIsClaimedInDatabase(foundItem.id)        }
     }
 
     override fun getItemCount(): Int {
         return items.size
+    }
+    private fun updateIsClaimedInDatabase(documentId: String) {
+        val foundRef = db.collection("Found").document(documentId)
+
+        // Update the isClaimed field to true
+        foundRef.update("isClaimed", true)
+            .addOnSuccessListener {
+                // Update successful
+                // You may handle success as needed
+            }
+            .addOnFailureListener { e ->
+                // Handle failure
+                // You may log the error or display a message to the user
+            }
     }
 }

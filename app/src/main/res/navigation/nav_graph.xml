@@ -9,7 +9,7 @@
         android:id="@+id/LostFragment"
         android:name="com.example.project.LostFragment"
         android:label=""
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_lost">
 
         <!-- Add this action for navigation from FirstFragment to SecondFragment -->
         <action

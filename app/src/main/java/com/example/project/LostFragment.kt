@@ -12,15 +12,14 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.project.databinding.FragmentFirstBinding
+import com.example.project.databinding.FragmentLostBinding
 import com.example.project.model.Post
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 
-
 class LostFragment : Fragment() {
 
-    private var _binding: FragmentFirstBinding? = null
+    private var _binding: FragmentLostBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var pickImageLauncher: ActivityResultLauncher<Intent>
@@ -30,7 +29,7 @@ class LostFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentFirstBinding.inflate(inflater, container, false)
+        _binding = FragmentLostBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -92,7 +91,11 @@ class LostFragment : Fragment() {
             location = location
         )
 
-        db.collection("Post").add(post)
+        // Generate a unique ID for the post
+        val postId = db.collection("Post").document().id
+        post.id = postId // Set the generated ID in the post object
+
+        db.collection("Post").document(postId).set(post) // Use the generated ID when adding the post
             .addOnSuccessListener {
                 Toast.makeText(requireContext(), "Post added successfully", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
