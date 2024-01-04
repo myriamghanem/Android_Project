@@ -69,7 +69,7 @@ class FoundItemAdapter(private val context: Context, private val items: List<Fou
             }
 
             // Update the isClaimed field to true
-            foundRef.update("isClaimed", true)
+            foundRef.update("isclaimed", true)
                 .addOnSuccessListener {
                     // Update successful
                     // Note: The real-time listener in fetchFoundItemsFromFirestore will automatically refresh the UI
