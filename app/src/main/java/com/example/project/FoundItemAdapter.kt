@@ -1,5 +1,6 @@
 package com.example.project
 
+import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +17,6 @@ class FoundItemAdapter(private val context: Context, private val items: List<Fou
     RecyclerView.Adapter<FoundItemAdapter.ViewHolder>() {
 
     private val db = FirebaseFirestore.getInstance()
-
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textViewUserName: TextView = itemView.findViewById(R.id.textViewUserName)
@@ -43,13 +43,31 @@ class FoundItemAdapter(private val context: Context, private val items: List<Fou
         holder.textItemDescription.text = foundItem.description
 
         holder.buttonClaim.setOnClickListener {
-            // Handle button click if needed
-            updateIsClaimedInDatabase(foundItem.id)
+            // Show a confirmation dialog before claiming
+            showClaimConfirmationDialog(foundItem.id)
         }
     }
 
     override fun getItemCount(): Int {
         return items.size
+    }
+
+    private fun showClaimConfirmationDialog(documentId: String) {
+        val alertDialogBuilder = AlertDialog.Builder(context)
+        alertDialogBuilder.setTitle("Claim Item")
+        alertDialogBuilder.setMessage("Are you sure you want to claim this item?")
+
+        alertDialogBuilder.setPositiveButton("OK") { dialog, which ->
+            // User clicked OK, proceed with the claim
+            updateIsClaimedInDatabase(documentId)
+        }
+
+        alertDialogBuilder.setNegativeButton("Cancel") { dialog, which ->
+            // User clicked Cancel, do nothing
+        }
+
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
     }
 
     private fun updateIsClaimedInDatabase(documentId: String) {
@@ -63,7 +81,7 @@ class FoundItemAdapter(private val context: Context, private val items: List<Fou
             }
 
             // Check if the document exists and the isClaimed field is true
-            if (snapshot != null && snapshot.exists() && snapshot.getBoolean("isClaimed") == true) {
+            if (snapshot != null && snapshot.exists() && snapshot.getBoolean("isclaimed") == true) {
                 // The isClaimed field is true, no need to update UI again
                 return@addSnapshotListener
             }

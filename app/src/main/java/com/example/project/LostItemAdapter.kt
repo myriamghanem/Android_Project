@@ -1,3 +1,4 @@
+import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -41,16 +42,31 @@ class LostItemAdapter(private val context: Context, private val items: List<Post
         holder.imageViewLostItem.loadImageFromURL(post.imageUrl) // Assuming you're using a library like Glide or Picasso to load images
         holder.textViewLostItemName.text = post.itemName
         holder.textItemDescription.text = post.description
-
         holder.buttonFound.setOnClickListener {
-            // Handle button click if needed
-            // You may want to update the post status here
-            updateIsFoundInDatabase(post.id)
+            // Show a confirmation dialog before marking as found
+            showMarkAsFoundConfirmationDialog(post.id)
         }
     }
 
     override fun getItemCount(): Int {
         return items.size
+    }
+    private fun showMarkAsFoundConfirmationDialog(documentId: String) {
+        val alertDialogBuilder = AlertDialog.Builder(context)
+        alertDialogBuilder.setTitle("Mark Item as Found")
+        alertDialogBuilder.setMessage("Are you sure you want to mark this item as found?")
+
+        alertDialogBuilder.setPositiveButton("OK") { dialog, which ->
+            // User clicked OK, proceed with marking as found
+            updateIsFoundInDatabase(documentId)
+        }
+
+        alertDialogBuilder.setNegativeButton("Cancel") { dialog, which ->
+            // User clicked Cancel, do nothing
+        }
+
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
     }
 
     private fun updateIsFoundInDatabase(documentId: String) {
