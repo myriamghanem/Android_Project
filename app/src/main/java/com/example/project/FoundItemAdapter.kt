@@ -23,6 +23,7 @@ class FoundItemAdapter(private val context: Context, private val items: List<Fou
         val imageViewFoundItem: ImageView = itemView.findViewById(R.id.imageViewFoundItem)
         val textViewFoundItemName: TextView = itemView.findViewById(R.id.textViewFoundItemName)
         val textItemDescription: TextView = itemView.findViewById(R.id.textViewItemDescription)
+        val textItemLocation : TextView = itemView.findViewById(R.id.textViewItemLocation)
         val buttonClaim: Button = itemView.findViewById(R.id.buttonClaim)
     }
 
@@ -41,6 +42,7 @@ class FoundItemAdapter(private val context: Context, private val items: List<Fou
         holder.imageViewFoundItem.loadImageFromURL(foundItem.imageUrl) // Assuming you're using a library like Glide or Picasso to load images
         holder.textViewFoundItemName.text = foundItem.itemName
         holder.textItemDescription.text = foundItem.description
+        holder.textItemLocation.text = foundItem.location
 
         holder.buttonClaim.setOnClickListener {
             // Show a confirmation dialog before claiming

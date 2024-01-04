@@ -41,7 +41,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:background="@android:color/transparent"
-                android:src="@drawable/usericon"
+                android:src="@drawable/logouticon"
             android:contentDescription="Logout Button"/>
             <!-- Add your navigation elements here if needed -->
 

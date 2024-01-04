@@ -24,6 +24,7 @@ class LostItemAdapter(private val context: Context, private val items: List<Post
         val imageViewLostItem: ImageView = itemView.findViewById(R.id.imageViewLostItem)
         val textViewLostItemName: TextView = itemView.findViewById(R.id.textViewLostItemName)
         val textItemDescription: TextView = itemView.findViewById(R.id.textViewItemDescription)
+        val textItemLocation: TextView = itemView.findViewById(R.id.textViewItemLocation)
         val buttonFound: Button = itemView.findViewById(R.id.buttonFound)
     }
 
@@ -42,6 +43,7 @@ class LostItemAdapter(private val context: Context, private val items: List<Post
         holder.imageViewLostItem.loadImageFromURL(post.imageUrl) // Assuming you're using a library like Glide or Picasso to load images
         holder.textViewLostItemName.text = post.itemName
         holder.textItemDescription.text = post.description
+        holder.textItemLocation.text = post.location
         holder.buttonFound.setOnClickListener {
             // Show a confirmation dialog before marking as found
             showMarkAsFoundConfirmationDialog(post.id)
