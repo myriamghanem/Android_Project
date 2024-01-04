@@ -2,6 +2,7 @@ package com.example.project
 
 import LostItemAdapter
 import android.content.ContentValues
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +29,7 @@ class SecondFragment : Fragment() {
     private lateinit var lostButton: Button
     private lateinit var foundButton: Button
     private lateinit var addButton: Button
+    private lateinit var logoutButton: ImageButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +45,15 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        val logoutButton: ImageButton = view.findViewById(R.id.logoutButton)
+
+        // Set a click listener for the logoutButton
+        logoutButton.setOnClickListener {
+            // Handle the click event here
+            logout()
+        }
 
         // Initially hide the FloatingActionButton
 
@@ -70,7 +82,17 @@ class SecondFragment : Fragment() {
         // Fetch lost items initially
         fetchLostItemsFromFirestore()
     }
+    private fun logout() {
+        // Perform any necessary logout actions here
+        // For example, you might want to clear user authentication state
 
+        // Navigate to the EntryActivity
+        val entryActivityIntent = Intent(requireContext(), EntryActivity::class.java)
+        startActivity(entryActivityIntent)
+
+        // Optionally, you can finish the current activity to prevent going back to it
+        requireActivity().finish()
+    }
     private fun makeBold(button: Button) {
         button.setTypeface(null, Typeface.BOLD)
     }

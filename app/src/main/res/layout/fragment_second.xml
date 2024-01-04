@@ -34,7 +34,15 @@
                 android:textColor="@color/white"
                 android:textSize="26sp"
                 android:textStyle="bold" />
-
+            <ImageButton
+                android:id="@+id/logoutButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@android:color/transparent"
+                android:src="@drawable/usericon"
+            android:contentDescription="Logout Button"/>
             <!-- Add your navigation elements here if needed -->
 
         </RelativeLayout>
