@@ -7,5 +7,5 @@ public data class Found(
     val imageUrl: String = "",
     val location: String = "",
     val userId: String? = null,
-    val Isclaimed: Boolean= false
+    val isclaimed: Boolean= false
 )

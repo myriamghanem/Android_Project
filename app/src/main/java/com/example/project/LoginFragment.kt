@@ -16,7 +16,7 @@ class LoginFragment : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = FragmentLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        //initialized to interact with Firebase Authentication.
         firebaseAuth = FirebaseAuth.getInstance()
 
         binding.textView.setOnClickListener {

@@ -19,7 +19,7 @@ class LostItemAdapter(private val context: Context, private val items: List<Post
 
     private val db = FirebaseFirestore.getInstance()
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) { //holding references to the views within each item in the RecyclerView.
         val textViewUserName: TextView = itemView.findViewById(R.id.textViewUserName)
         val imageViewLostItem: ImageView = itemView.findViewById(R.id.imageViewLostItem)
         val textViewLostItemName: TextView = itemView.findViewById(R.id.textViewLostItemName)
@@ -114,9 +114,9 @@ class LostItemAdapter(private val context: Context, private val items: List<Post
                         itemName = post?.itemName ?: "",
                         description = post?.description ?: "",
                         imageUrl = post?.imageUrl ?: "",
-                        location = "", // Set location based on your requirements
+                        location = post?.location?:"", // Set location based on your requirements
                         userId = post?.userId ?: "",
-                        Isclaimed = false
+                        isclaimed = false
                     )
 
                     // Add the found item to the "Found" table

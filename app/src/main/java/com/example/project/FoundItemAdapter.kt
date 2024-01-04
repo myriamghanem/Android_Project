@@ -19,6 +19,7 @@ class FoundItemAdapter(private val context: Context, private val items: List<Fou
     private val db = FirebaseFirestore.getInstance()
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        //represent various views based on their IDs in the item layout.
         val textViewUserName: TextView = itemView.findViewById(R.id.textViewUserName)
         val imageViewFoundItem: ImageView = itemView.findViewById(R.id.imageViewFoundItem)
         val textViewFoundItemName: TextView = itemView.findViewById(R.id.textViewFoundItemName)
@@ -27,6 +28,7 @@ class FoundItemAdapter(private val context: Context, private val items: List<Fou
         val buttonClaim: Button = itemView.findViewById(R.id.buttonClaim)
     }
 
+    //creation of views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.item_found_item, parent, false)
@@ -56,8 +58,8 @@ class FoundItemAdapter(private val context: Context, private val items: List<Fou
 
     private fun showClaimConfirmationDialog(documentId: String) {
         val alertDialogBuilder = AlertDialog.Builder(context)
-        alertDialogBuilder.setTitle("Claim Item")
-        alertDialogBuilder.setMessage("Are you sure you want to claim this item?")
+        alertDialogBuilder.setTitle("Mark Item as Claimed")
+        alertDialogBuilder.setMessage("Are you sure you want to mark this item as claimed?")
 
         alertDialogBuilder.setPositiveButton("OK") { dialog, which ->
             // User clicked OK, proceed with the claim
