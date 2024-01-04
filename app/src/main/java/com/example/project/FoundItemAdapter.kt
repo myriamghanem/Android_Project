@@ -27,7 +27,8 @@ class FoundItemAdapter(private val context: Context, private val items: List<Fou
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_found_item, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_found_item, parent, false)
         return ViewHolder(view)
     }
 
@@ -43,24 +44,40 @@ class FoundItemAdapter(private val context: Context, private val items: List<Fou
 
         holder.buttonClaim.setOnClickListener {
             // Handle button click if needed
-            updateIsClaimedInDatabase(foundItem.id)        }
+            updateIsClaimedInDatabase(foundItem.id)
+        }
     }
 
     override fun getItemCount(): Int {
         return items.size
     }
+
     private fun updateIsClaimedInDatabase(documentId: String) {
         val foundRef = db.collection("Found").document(documentId)
 
-        // Update the isClaimed field to true
-        foundRef.update("isClaimed", true)
-            .addOnSuccessListener {
-                // Update successful
-                // You may handle success as needed
+        // Add a snapshot listener to listen for real-time updates
+        foundRef.addSnapshotListener { snapshot, error ->
+            if (error != null) {
+                // Handle error
+                return@addSnapshotListener
             }
-            .addOnFailureListener { e ->
-                // Handle failure
-                // You may log the error or display a message to the user
+
+            // Check if the document exists and the isClaimed field is true
+            if (snapshot != null && snapshot.exists() && snapshot.getBoolean("isClaimed") == true) {
+                // The isClaimed field is true, no need to update UI again
+                return@addSnapshotListener
             }
+
+            // Update the isClaimed field to true
+            foundRef.update("isClaimed", true)
+                .addOnSuccessListener {
+                    // Update successful
+                    // Note: The real-time listener in fetchFoundItemsFromFirestore will automatically refresh the UI
+                }
+                .addOnFailureListener { e ->
+                    // Handle failure
+                    // You may log the error or display a message to the user
+                }
+        }
     }
 }

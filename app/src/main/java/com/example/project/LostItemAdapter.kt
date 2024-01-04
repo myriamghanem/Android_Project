@@ -56,19 +56,32 @@ class LostItemAdapter(private val context: Context, private val items: List<Post
     private fun updateIsFoundInDatabase(documentId: String) {
         val postRef = db.collection("Post").document(documentId)
 
-        // Update the Isfound field to true
-        postRef.update("isfound", true)
-            .addOnSuccessListener {
-                // Update successful
-                // Add the item to the Found table when isfound is true
-                    addToFoundTable(postRef)
+        // Add a snapshot listener to listen for real-time updates
+        postRef.addSnapshotListener { snapshot, error ->
+            if (error != null) {
+                // Handle error
+                return@addSnapshotListener
             }
-            .addOnFailureListener { e ->
-                // Handle failure
-                // You may log the error or display a message to the user
-            }
-    }
 
+            // Check if the document exists and the isfound field is true
+            if (snapshot != null && snapshot.exists() && snapshot.getBoolean("isfound") == true) {
+                // The isfound field is true, no need to update UI again
+                return@addSnapshotListener
+            }
+
+            // Update the isfound field to true
+            postRef.update("isfound", true)
+                .addOnSuccessListener {
+                    // Update successful
+                    // Note: The real-time listener in fetchLostItemsFromFirestore will automatically refresh the UI
+                    addToFoundTable(postRef)
+                }
+                .addOnFailureListener { e ->
+                    // Handle failure
+                    // You may log the error or display a message to the user
+                }
+        }
+    }
     private fun addToFoundTable(postRef: DocumentReference) {
         // Get the post data from the Firestore document
         postRef.get()
@@ -85,7 +98,7 @@ class LostItemAdapter(private val context: Context, private val items: List<Post
                         imageUrl = post?.imageUrl ?: "",
                         location = "", // Set location based on your requirements
                         userId = post?.userId ?: 0,
-                        claimed = false
+                        Isclaimed = false
                     )
 
                     // Add the found item to the "Found" table

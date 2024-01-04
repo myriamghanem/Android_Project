@@ -83,7 +83,7 @@ class SecondFragment : Fragment() {
         val db = FirebaseFirestore.getInstance()
 
         val query = db.collection("Found")
-            .whereEqualTo("isClaimed", false)
+            .whereEqualTo("Isclaimed", false)
 
         // Add a snapshot listener to listen for real-time updates
         query.addSnapshotListener { value, error ->
