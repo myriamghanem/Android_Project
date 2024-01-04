@@ -60,7 +60,9 @@ class FoundFragment : Fragment() {
             }
         }
 
-        // Add back button click listener
+        binding.buttonBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun openGalleryForImage() {

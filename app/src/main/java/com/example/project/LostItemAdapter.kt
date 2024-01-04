@@ -115,7 +115,7 @@ class LostItemAdapter(private val context: Context, private val items: List<Post
                         description = post?.description ?: "",
                         imageUrl = post?.imageUrl ?: "",
                         location = "", // Set location based on your requirements
-                        userId = post?.userId ?: 0,
+                        userId = post?.userId ?: "",
                         Isclaimed = false
                     )
 
